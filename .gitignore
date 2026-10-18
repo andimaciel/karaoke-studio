@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Python virtual environment
+.venv/
+venv/
+ENV/
+env/
+backend/.venv/
+
+# Node / Frontend dependencies & build
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Application data, generated files and cache
+backend/data/settings.json
+backend/data/projects/*
+!backend/data/projects/.gitkeep
+backend/data/temp/*
+!backend/data/temp/.gitkeep
+backend/data/models/*
+!backend/data/models/.gitkeep
+test_samples/
+*.mp4
+*.wav
+*.mp3
+*.flac
+*.mkv
+*.webm
+*.mov
+*.ass
+*.srt
+
+# Temporary test outputs
+test_*.png
+test_*.mp4
+test_*.wav
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

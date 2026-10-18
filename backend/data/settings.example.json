@@ -1,0 +1,8 @@
+{
+  "default_separation_model": "UVR-MDX-NET-Inst_HQ_3.onnx",
+  "default_karaoke_model": "UVR_MDXNET_KARA_2.onnx",
+  "whisper_model_size": "base",
+  "audioshake_api_key": "",
+  "export_resolution": "1920x1080",
+  "export_fps": 30
+}
