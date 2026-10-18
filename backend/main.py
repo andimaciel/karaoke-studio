@@ -20,6 +20,7 @@ from backend.services.transcriber_service import TranscriberService
 from backend.services.lyric_aligner import LyricAlignerService
 from backend.services.video_renderer import VideoRendererService
 from backend.services.audioshake_service import AudioShakeService
+from backend.services.supabase_service import SupabaseService
 
 # Initialize app
 app = FastAPI(title="Karaokê Studio API", version="1.0.0")
@@ -83,6 +84,9 @@ class SettingsUpdate(BaseModel):
     audioshake_api_key: Optional[str] = None
     whisper_model_size: Optional[str] = None
     default_separation_model: Optional[str] = None
+    supabase_url: Optional[str] = None
+    supabase_key: Optional[str] = None
+    supabase_sync_enabled: Optional[bool] = None
 
 # ----------------- Routes -----------------
 
@@ -91,13 +95,15 @@ async def health():
     return {
         "status": "ok",
         "ffmpeg": bool(FFMPEG_BIN),
-        "audioshake": AudioShakeService.get_status_info()
+        "audioshake": AudioShakeService.get_status_info(),
+        "supabase": SupabaseService.test_connection()
     }
 
 @app.get("/api/settings")
 async def get_app_settings():
     settings = get_settings()
     settings["audioshake_status"] = AudioShakeService.get_status_info()
+    settings["supabase_status"] = SupabaseService.test_connection()
     settings["supported_models"] = SUPPORTED_MODELS
     return settings
 
@@ -110,6 +116,12 @@ async def update_app_settings(data: SettingsUpdate):
         updates["whisper_model_size"] = data.whisper_model_size
     if data.default_separation_model is not None:
         updates["default_separation_model"] = data.default_separation_model
+    if data.supabase_url is not None:
+        updates["supabase_url"] = data.supabase_url.strip()
+    if data.supabase_key is not None:
+        updates["supabase_key"] = data.supabase_key.strip()
+    if data.supabase_sync_enabled is not None:
+        updates["supabase_sync_enabled"] = data.supabase_sync_enabled
     return update_settings(updates)
 
 @app.get("/api/projects")
@@ -122,6 +134,20 @@ async def get_project(project_id: str):
     if not proj:
         raise HTTPException(status_code=404, detail="Projeto não encontrado.")
     return proj
+
+@app.delete("/api/project/{project_id}")
+async def delete_project(project_id: str):
+    JobManager.delete_project(project_id)
+    return {"success": True, "message": f"Projeto {project_id} excluído com sucesso."}
+
+@app.get("/api/supabase/status")
+async def get_supabase_status():
+    return SupabaseService.test_connection()
+
+@app.post("/api/supabase/sync")
+async def sync_supabase_projects():
+    result = SupabaseService.sync_all_local_projects()
+    return result
 
 @app.post("/api/upload")
 async def upload_file(file: UploadFile = File(...)):

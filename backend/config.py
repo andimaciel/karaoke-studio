@@ -43,6 +43,9 @@ DEFAULT_SETTINGS = {
     "audioshake_api_key": "",
     "export_resolution": "1920x1080",
     "export_fps": 30,
+    "supabase_url": "",
+    "supabase_key": "",
+    "supabase_sync_enabled": True,
 }
 
 def get_settings():

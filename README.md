@@ -114,6 +114,16 @@ Acesse a aplicação no navegador em `http://127.0.0.1:5173`.
 
 ---
 
+## ☁️ Persistência em Nuvem com Supabase
+
+A aplicação conta com sincronização e persistência nativa em nuvem via **Supabase (PostgreSQL + PostgREST)**:
+- **Backup Automático:** Cada projeto criado, editado ou renderizado é salvo localmente e espelhado no Supabase.
+- **Tabela `projects`:** Armazena metadados estruturados, informações de faixas, timestamps e letras sincronizadas em JSONB.
+- **Painel de Projetos:** Indicador de status de sincronização (`Nuvem`) e botão de backup sob demanda.
+- **Privacidade & Segurança:** Chaves de API mantidas em ambiente seguro e configuráveis via painel de configurações.
+
+---
+
 ## 📝 Licenças e Atribuições
 - **UVR (Ultimate Vocal Remover) / MDX-Net:** Modelos desenvolvidos pela comunidade UVR (Anjok07, Kuielab). Licença MIT / Não comercial conforme os pesos originais.
 - **faster-whisper:** Baseado no modelo Whisper da OpenAI, reimplementado com CTranslate2 sob licença MIT.

@@ -116,4 +116,11 @@ export interface AppSettings {
     model_file: string;
     description: string;
   }>;
+  supabase_url?: string;
+  supabase_key?: string;
+  supabase_sync_enabled?: boolean;
+  supabase_status?: {
+    connected: boolean;
+    message: string;
+  };
 }

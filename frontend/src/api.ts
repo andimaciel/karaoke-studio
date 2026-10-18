@@ -28,7 +28,7 @@ export async function getProject(projectId: string): Promise<Project> {
   return res.json();
 }
 
-export async function listProjects(): Promise<Array<{ id: string; created_at: string; title: string; artist: string; status: string; has_video: boolean }>> {
+export async function listProjects(): Promise<Array<{ id: string; created_at: string; title: string; artist: string; status: string; has_video: boolean; synced?: boolean; cloud_only?: boolean }>> {
   const res = await fetch(`${API_BASE}/api/projects`);
   if (!res.ok) throw new Error('Erro ao listar projetos');
   return res.json();
@@ -168,5 +168,21 @@ export async function updateAppSettings(settings: Partial<AppSettings>): Promise
     body: JSON.stringify(settings),
   });
   if (!res.ok) throw new Error('Erro ao salvar configurações');
+  return res.json();
+}
+
+export async function deleteProject(projectId: string): Promise<{ success: boolean; message: string }> {
+  const res = await fetch(`${API_BASE}/api/project/${projectId}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Erro ao excluir projeto');
+  return res.json();
+}
+
+export async function syncSupabase(): Promise<{ success: boolean; synced_count: number; message: string }> {
+  const res = await fetch(`${API_BASE}/api/supabase/sync`, {
+    method: 'POST',
+  });
+  if (!res.ok) throw new Error('Erro ao sincronizar com o Supabase');
   return res.json();
 }
