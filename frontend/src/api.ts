@@ -1,8 +1,11 @@
 import { Project, AppSettings, SongInfo, LyricLine, BackgroundConfig, StyleConfig } from './types';
 
-export const API_BASE = (typeof window !== 'undefined')
-  ? `${window.location.protocol}//${window.location.hostname || 'localhost'}:8000`
-  : 'http://127.0.0.1:8000';
+export const API_BASE =
+  import.meta.env.VITE_API_BASE ||
+  import.meta.env.VITE_API_URL ||
+  (typeof window !== 'undefined' && window.location.port !== '5173' && window.location.port !== '3000'
+    ? `${window.location.protocol}//${window.location.hostname}:8000`
+    : 'http://127.0.0.1:8000');
 
 
 export async function uploadMediaFile(file: File): Promise<Project> {
