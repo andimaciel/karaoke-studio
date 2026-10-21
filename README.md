@@ -83,7 +83,19 @@ karaoke-maker/
 - **Python 3.11** (gerenciado com `uv` ou instalador padrão)
 - **Node.js 18+**
 
-### 2. Iniciar o Backend (FastAPI)
+### 🚀 Inicialização com 1-Clique (Recomendado)
+Para abrir o estúdio de forma prática sem precisar usar terminais:
+1. Dê dois cliques no atalho **`Karaoke Studio`** na sua **Área de Trabalho** (ou execute `iniciar_karaoke.bat`).
+2. O sistema iniciará o backend e frontend silenciosamente e abrirá o seu navegador padrão em `http://localhost:5173/`.
+3. Quando terminar de usar, basta clicar no atalho **`Encerrar Karaoke Studio`** (ou executar `encerrar_karaoke.bat`) para liberar a memória RAM do computador.
+
+### 📱 Acesso pelo Celular / TV na Mesma Rede Wi-Fi
+Como o servidor foi configurado com `--host`, qualquer dispositivo conectado à sua rede Wi-Fi doméstica (celular, tablet ou Smart TV) pode abrir o Karaokê Studio diretamente através do seu IP local (exemplo: `http://192.168.0.243:5173`).
+
+---
+
+### 💻 Inicialização Manual via Terminal (Desenvolvimento)
+#### 1. Iniciar o Backend (FastAPI)
 No terminal do projeto:
 ```powershell
 # Ativar ambiente e iniciar servidor
